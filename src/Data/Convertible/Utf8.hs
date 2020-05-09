@@ -1,11 +1,7 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 
-module Data.Convertible.Utf8
-  ( Convertible,
-    convert,
-  )
-where
+module Data.Convertible.Utf8 where
 
 import qualified Data.ByteString           as BS
 import qualified Data.ByteString.Builder   as BSB
@@ -21,11 +17,11 @@ import qualified Data.Text.Lazy.Builder    as TB
 import qualified Data.Text.Lazy.Encoding   as TLE
 import qualified Data.Text.Short           as TS
 
-{- | A typeclass that represents something that can be converted.
-A @Convertible a b@ instance represents an @a@ that can be converted to a @b@. -}
+-- | A typeclass that represents something that can be converted.
+--  A @Convertible a b@ instance represents an @a@ that can be converted to a @b@.
 class Convertible a b where
-  {- | Convert from @a@ to @b@.
-   Byte string is assumed to be in utf-8 encoding. -}
+  -- | Convert from @a@ to @b@.
+  --    Byte string is assumed to be in utf-8 encoding.
   convert :: a -> b
 
 -- Convert from String

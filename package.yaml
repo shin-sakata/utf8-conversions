@@ -6,7 +6,7 @@ author:              Shintaro Sakata
 maintainer:          Shintaro Sakata
 copyright:           2020 Shintaro Sakata
 category:            Data, Codec
-synopsis:            A conversion library that assumes utf8
+synopsis:            A string conversion library that assumes utf8
 
 extra-source-files:
 - README.md

@@ -1,4 +1,4 @@
-# `utf8-conversions` A conversion library that assumes utf8
+# `utf8-conversions` A string conversion library that assumes utf8
 
 This package provides a　Data.Convertible.Utf8 library for easy conversion of many string types in Haskell
 

@@ -8,7 +8,7 @@ cabal-version: 1.12
 
 name:           utf8-conversions
 version:        0.1.0.0
-synopsis:       A conversion library that assumes utf8
+synopsis:       A string conversion library that assumes utf8
 description:    Please see the README on GitHub at <https://github.com/chemirea/utf8-conversions#readme>
 category:       Data, Codec
 homepage:       https://github.com/chemirea/utf8-conversions#readme

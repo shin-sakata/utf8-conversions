@@ -1,5 +1,8 @@
 # `utf8-conversions` A string conversion library that assumes utf8
 
+[![Build Status](https://travis-ci.org/chemirea/utf8-conversions.svg?branch=master)](https://travis-ci.org/chemirea/utf8-conversions)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
 This package provides a　Data.Convertible.Utf8 library for easy conversion of many string types in Haskell
 
 ## Support
@@ -30,7 +33,7 @@ Libraries that use maybe types are very labor intensive.
 Libraries that do not explicitly state UTF8 are insecure
 
 Therefore, this library clearly states that it assumes UTF8 and performs the conversion without using the MAYBE type, which is both safe and easy.
-。
+
 
 ## Get involved!
 

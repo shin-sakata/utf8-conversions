@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: dc3458c699cbf3d5a096c6d938bcdb014a8449855475ccdbb3a942ddabf080a3
+-- hash: 20209884cc91e2f55dd943d96653bb5b2e58acef1a573c9f365558c049180cc1
 
 name:           utf8-conversions
 version:        0.1.0.1
@@ -38,7 +38,7 @@ library
       base >=4.7 && <5
     , bytestring >=0.10.4 && <0.11
     , text >=1.0 && <1.3
-    , text-short >=0.1.2 && <0.1.4
+    , text-short >=0.1.1 && <0.1.4
     , utf8-string >=1.0 && <1.2
   default-language: Haskell2010
 
@@ -57,7 +57,7 @@ test-suite utf8-conversions-test
     , charsetdetect
     , hspec
     , text >=1.0 && <1.3
-    , text-short >=0.1.2 && <0.1.4
+    , text-short >=0.1.1 && <0.1.4
     , utf8-conversions
     , utf8-string >=1.0 && <1.2
   default-language: Haskell2010

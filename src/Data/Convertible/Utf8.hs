@@ -3,6 +3,7 @@
 
 module Data.Convertible.Utf8 where
 
+import qualified Codec.Binary.UTF8.String  as Codec.UTF8
 import qualified Data.ByteString           as BS
 import qualified Data.ByteString.Builder   as BSB
 import qualified Data.ByteString.Lazy      as BSL
@@ -24,344 +25,353 @@ class Convertible a b where
   --    Byte string is assumed to be in utf-8 encoding.
   convert :: a -> b
 
+type Text = T.Text
+type LazyText = TL.Text
+type TextBuilder = TB.Builder
+type ShortText = TS.ShortText
+type ByteString = BS.ByteString
+type LazyByteString = BSL.ByteString
+type ByteStringBuilder = BSB.Builder
+type ShortByteString = BSS.ShortByteString
+
 -- Convert from String
 
 instance Convertible String String where
   {-# INLINE convert #-}
   convert = id
 
-instance Convertible String T.Text where
+instance Convertible String Text where
   {-# INLINE convert #-}
   convert = T.pack
 
-instance Convertible String TL.Text where
+instance Convertible String LazyText where
   {-# INLINE convert #-}
   convert = TL.pack
 
-instance Convertible String TB.Builder where
+instance Convertible String TextBuilder where
   {-# INLINE convert #-}
   convert = TB.fromString
 
-instance Convertible String TS.ShortText where
+instance Convertible String ShortText where
   {-# INLINE convert #-}
   convert = TS.fromString
 
-instance Convertible String BS.ByteString where
+instance Convertible String ByteString where
   {-# INLINE convert #-}
   convert = BS.UTF8.fromString
 
-instance Convertible String BSL.ByteString where
+instance Convertible String LazyByteString where
   {-# INLINE convert #-}
   convert = BSL.UTF8.fromString
 
-instance Convertible String BSB.Builder where
+instance Convertible String ByteStringBuilder where
   {-# INLINE convert #-}
   convert = BSB.stringUtf8
 
-instance Convertible String BSS.ShortByteString where
+instance Convertible String ShortByteString where
   {-# INLINE convert #-}
-  convert = BSS.toShort . BS.UTF8.fromString
+  convert = BSS.pack . Codec.UTF8.encode
 
 -- Convert from Text
 
-instance Convertible T.Text String where
+instance Convertible Text String where
   {-# INLINE convert #-}
   convert = T.unpack
 
-instance Convertible T.Text T.Text where
+instance Convertible Text Text where
   {-# INLINE convert #-}
   convert = id
 
-instance Convertible T.Text TL.Text where
+instance Convertible Text LazyText where
   {-# INLINE convert #-}
   convert = TL.fromStrict
 
-instance Convertible T.Text TB.Builder where
+instance Convertible Text TextBuilder where
   {-# INLINE convert #-}
   convert = TB.fromText
 
-instance Convertible T.Text TS.ShortText where
+instance Convertible Text ShortText where
   {-# INLINE convert #-}
   convert = TS.fromText
 
-instance Convertible T.Text BS.ByteString where
+instance Convertible Text ByteString where
   {-# INLINE convert #-}
   convert = TE.encodeUtf8
 
-instance Convertible T.Text BSL.ByteString where
+instance Convertible Text LazyByteString where
   {-# INLINE convert #-}
   convert = BSL.fromStrict . TE.encodeUtf8
 
-instance Convertible T.Text BSB.Builder where
+instance Convertible Text ByteStringBuilder where
   {-# INLINE convert #-}
   convert = TE.encodeUtf8Builder
 
-instance Convertible T.Text BSS.ShortByteString where
+instance Convertible Text ShortByteString where
   {-# INLINE convert #-}
   convert = BSS.toShort . TE.encodeUtf8
 
 -- Convert from LazyText
 
-instance Convertible TL.Text String where
+instance Convertible LazyText String where
   {-# INLINE convert #-}
   convert = TL.unpack
 
-instance Convertible TL.Text T.Text where
+instance Convertible LazyText Text where
   {-# INLINE convert #-}
   convert = TL.toStrict
 
-instance Convertible TL.Text TL.Text where
+instance Convertible LazyText LazyText where
   {-# INLINE convert #-}
   convert = id
 
-instance Convertible TL.Text TS.ShortText where
+instance Convertible LazyText ShortText where
   {-# INLINE convert #-}
   convert = TS.fromText . TL.toStrict
 
-instance Convertible TL.Text TB.Builder where
+instance Convertible LazyText TextBuilder where
   {-# INLINE convert #-}
   convert = TB.fromLazyText
 
-instance Convertible TL.Text BS.ByteString where
+instance Convertible LazyText ByteString where
   {-# INLINE convert #-}
   convert = BSL.toStrict . TLE.encodeUtf8
 
-instance Convertible TL.Text BSL.ByteString where
+instance Convertible LazyText LazyByteString where
   {-# INLINE convert #-}
   convert = TLE.encodeUtf8
 
-instance Convertible TL.Text BSB.Builder where
+instance Convertible LazyText ByteStringBuilder where
   {-# INLINE convert #-}
   convert = TLE.encodeUtf8Builder
 
-instance Convertible TL.Text BSS.ShortByteString where
+instance Convertible LazyText ShortByteString where
   {-# INLINE convert #-}
   convert = BSS.toShort . BSL.toStrict . TLE.encodeUtf8
 
 -- Convert from ShortText
 
-instance Convertible TS.ShortText String where
+instance Convertible ShortText String where
   {-# INLINE convert #-}
   convert = TS.toString
 
-instance Convertible TS.ShortText T.Text where
+instance Convertible ShortText Text where
   {-# INLINE convert #-}
   convert = TS.toText
 
-instance Convertible TS.ShortText TL.Text where
+instance Convertible ShortText LazyText where
   {-# INLINE convert #-}
   convert = TL.fromStrict . TS.toText
 
-instance Convertible TS.ShortText TS.ShortText where
+instance Convertible ShortText ShortText where
   {-# INLINE convert #-}
   convert = id
 
-instance Convertible TS.ShortText TB.Builder where
+instance Convertible ShortText TextBuilder where
   {-# INLINE convert #-}
   convert = TB.fromText . TS.toText
 
-instance Convertible TS.ShortText BS.ByteString where
+instance Convertible ShortText ByteString where
   {-# INLINE convert #-}
   convert = TS.toByteString
 
-instance Convertible TS.ShortText BSL.ByteString where
+instance Convertible ShortText LazyByteString where
   {-# INLINE convert #-}
   convert = BSB.toLazyByteString . TS.toBuilder
 
-instance Convertible TS.ShortText BSB.Builder where
+instance Convertible ShortText ByteStringBuilder where
   {-# INLINE convert #-}
   convert = TS.toBuilder
 
-instance Convertible TS.ShortText BSS.ShortByteString where
+instance Convertible ShortText ShortByteString where
   {-# INLINE convert #-}
   convert = TS.toShortByteString
 
 -- Convert from TextBuilder
 
-instance Convertible TB.Builder String where
+instance Convertible TextBuilder String where
   {-# INLINE convert #-}
   convert = TL.unpack . TB.toLazyText
 
-instance Convertible TB.Builder T.Text where
+instance Convertible TextBuilder Text where
   {-# INLINE convert #-}
   convert = TL.toStrict . TB.toLazyText
 
-instance Convertible TB.Builder TL.Text where
+instance Convertible TextBuilder LazyText where
   {-# INLINE convert #-}
   convert = TB.toLazyText
 
-instance Convertible TB.Builder TS.ShortText where
+instance Convertible TextBuilder ShortText where
   {-# INLINE convert #-}
   convert = TS.fromText . TL.toStrict . TB.toLazyText
 
-instance Convertible TB.Builder TB.Builder where
+instance Convertible TextBuilder TextBuilder where
   {-# INLINE convert #-}
   convert = id
 
-instance Convertible TB.Builder BS.ByteString where
+instance Convertible TextBuilder ByteString where
   {-# INLINE convert #-}
   convert = BSL.toStrict . TLE.encodeUtf8 . TB.toLazyText
 
-instance Convertible TB.Builder BSL.ByteString where
+instance Convertible TextBuilder LazyByteString where
   {-# INLINE convert #-}
   convert = TLE.encodeUtf8 . TB.toLazyText
 
-instance Convertible TB.Builder BSB.Builder where
+instance Convertible TextBuilder ByteStringBuilder where
   {-# INLINE convert #-}
   convert = TLE.encodeUtf8Builder . TB.toLazyText
 
-instance Convertible TB.Builder BSS.ShortByteString where
+instance Convertible TextBuilder ShortByteString where
   {-# INLINE convert #-}
   convert = BSS.toShort . BSL.toStrict . TLE.encodeUtf8 . TB.toLazyText
 
 -- Convert from ByteString
 
-instance Convertible BS.ByteString String where
+instance Convertible ByteString String where
   {-# INLINE convert #-}
   convert = BS.UTF8.toString
 
-instance Convertible BS.ByteString T.Text where
+instance Convertible ByteString Text where
   {-# INLINE convert #-}
   convert = TE.decodeUtf8
 
-instance Convertible BS.ByteString TL.Text where
+instance Convertible ByteString LazyText where
   {-# INLINE convert #-}
   convert = TLE.decodeUtf8 . BSL.fromStrict
 
-instance Convertible BS.ByteString TS.ShortText where
+instance Convertible ByteString ShortText where
   {-# INLINE convert #-}
   convert = fromJust . TS.fromByteString
 
-instance Convertible BS.ByteString TB.Builder where
+instance Convertible ByteString TextBuilder where
   {-# INLINE convert #-}
   convert = TB.fromLazyText . TL.fromStrict . TE.decodeUtf8
 
-instance Convertible BS.ByteString BS.ByteString where
+instance Convertible ByteString ByteString where
   {-# INLINE convert #-}
   convert = id
 
-instance Convertible BS.ByteString BSL.ByteString where
+instance Convertible ByteString LazyByteString where
   {-# INLINE convert #-}
   convert = BSL.fromStrict
 
-instance Convertible BS.ByteString BSB.Builder where
+instance Convertible ByteString ByteStringBuilder where
   {-# INLINE convert #-}
   convert = BSB.byteString
 
-instance Convertible BS.ByteString BSS.ShortByteString where
+instance Convertible ByteString ShortByteString where
   {-# INLINE convert #-}
   convert = BSS.toShort
 
 -- Convert from LazyByteString
 
-instance Convertible BSL.ByteString String where
+instance Convertible LazyByteString String where
   {-# INLINE convert #-}
   convert = BSL.UTF8.toString
 
-instance Convertible BSL.ByteString T.Text where
+instance Convertible LazyByteString Text where
   {-# INLINE convert #-}
   convert = TE.decodeUtf8 . BSL.toStrict
 
-instance Convertible BSL.ByteString TL.Text where
+instance Convertible LazyByteString LazyText where
   {-# INLINE convert #-}
   convert = TLE.decodeUtf8
 
-instance Convertible BSL.ByteString TS.ShortText where
+instance Convertible LazyByteString ShortText where
   {-# INLINE convert #-}
   convert = fromJust . TS.fromByteString . BSL.toStrict
 
-instance Convertible BSL.ByteString TB.Builder where
+instance Convertible LazyByteString TextBuilder where
   {-# INLINE convert #-}
   convert = TB.fromLazyText . TLE.decodeUtf8
 
-instance Convertible BSL.ByteString BS.ByteString where
+instance Convertible LazyByteString ByteString where
   {-# INLINE convert #-}
   convert = BSL.toStrict
 
-instance Convertible BSL.ByteString BSL.ByteString where
+instance Convertible LazyByteString LazyByteString where
   {-# INLINE convert #-}
   convert = id
 
-instance Convertible BSL.ByteString BSB.Builder where
+instance Convertible LazyByteString ByteStringBuilder where
   {-# INLINE convert #-}
   convert = BSB.lazyByteString
 
-instance Convertible BSL.ByteString BSS.ShortByteString where
+instance Convertible LazyByteString ShortByteString where
   {-# INLINE convert #-}
   convert = BSS.toShort . BSL.toStrict
 
 -- Convert from ByteStringBuilder
 
-instance Convertible BSB.Builder String where
+instance Convertible ByteStringBuilder String where
   {-# INLINE convert #-}
   convert = BSL.UTF8.toString . BSB.toLazyByteString
 
-instance Convertible BSB.Builder T.Text where
+instance Convertible ByteStringBuilder Text where
   {-# INLINE convert #-}
   convert = TE.decodeUtf8 . BSL.toStrict . BSB.toLazyByteString
 
-instance Convertible BSB.Builder TL.Text where
+instance Convertible ByteStringBuilder LazyText where
   {-# INLINE convert #-}
   convert = TLE.decodeUtf8 . BSB.toLazyByteString
 
-instance Convertible BSB.Builder TS.ShortText where
+instance Convertible ByteStringBuilder ShortText where
   {-# INLINE convert #-}
   convert = fromJust . TS.fromShortByteString . BSS.toShort . BSL.toStrict . BSB.toLazyByteString
 
-instance Convertible BSB.Builder TB.Builder where
+instance Convertible ByteStringBuilder TextBuilder where
   {-# INLINE convert #-}
   convert = TB.fromLazyText . TLE.decodeUtf8 . BSB.toLazyByteString
 
-instance Convertible BSB.Builder BS.ByteString where
+instance Convertible ByteStringBuilder ByteString where
   {-# INLINE convert #-}
   convert = BSL.toStrict . BSB.toLazyByteString
 
-instance Convertible BSB.Builder BSL.ByteString where
+instance Convertible ByteStringBuilder LazyByteString where
   {-# INLINE convert #-}
   convert = BSB.toLazyByteString
 
-instance Convertible BSB.Builder BSB.Builder where
+instance Convertible ByteStringBuilder ByteStringBuilder where
   {-# INLINE convert #-}
   convert = id
 
-instance Convertible BSB.Builder BSS.ShortByteString where
+instance Convertible ByteStringBuilder ShortByteString where
   {-# INLINE convert #-}
   convert = BSS.toShort . BSL.toStrict . BSB.toLazyByteString
 
 -- Convert from ShortByteString
 
-instance Convertible BSS.ShortByteString String where
+instance Convertible ShortByteString String where
   {-# INLINE convert #-}
-  convert = BS.UTF8.toString . BSS.fromShort
+  convert = Codec.UTF8.decode . BSS.unpack
 
-instance Convertible BSS.ShortByteString T.Text where
+instance Convertible ShortByteString Text where
   {-# INLINE convert #-}
   convert = TE.decodeUtf8 . BSS.fromShort
 
-instance Convertible BSS.ShortByteString TL.Text where
+instance Convertible ShortByteString LazyText where
   {-# INLINE convert #-}
   convert = TLE.decodeUtf8 . BSL.fromStrict . BSS.fromShort
 
-instance Convertible BSS.ShortByteString TS.ShortText where
+instance Convertible ShortByteString ShortText where
   {-# INLINE convert #-}
   convert = fromJust . TS.fromShortByteString
 
-instance Convertible BSS.ShortByteString TB.Builder where
+instance Convertible ShortByteString TextBuilder where
   {-# INLINE convert #-}
   convert = TB.fromText . TE.decodeUtf8 . BSS.fromShort
 
-instance Convertible BSS.ShortByteString BS.ByteString where
+instance Convertible ShortByteString ByteString where
   {-# INLINE convert #-}
   convert = BSS.fromShort
 
-instance Convertible BSS.ShortByteString BSL.ByteString where
+instance Convertible ShortByteString LazyByteString where
   {-# INLINE convert #-}
   convert = BSL.fromStrict . BSS.fromShort
 
-instance Convertible BSS.ShortByteString BSB.Builder where
+instance Convertible ShortByteString ByteStringBuilder where
   {-# INLINE convert #-}
   convert = BSB.byteString . BSS.fromShort
 
-instance Convertible BSS.ShortByteString BSS.ShortByteString where
+instance Convertible ShortByteString ShortByteString where
   {-# INLINE convert #-}
   convert = id

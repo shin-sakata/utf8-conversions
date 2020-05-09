@@ -34,3 +34,5 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - utf8-conversions
+    - charsetdetect
+    - hspec

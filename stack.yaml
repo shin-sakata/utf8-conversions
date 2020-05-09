@@ -39,7 +39,8 @@ packages:
 # - git: https://github.com/commercialhaskell/stack.git
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
-# extra-deps: []
+extra-deps:
+  - charsetdetect-1.1.0.2@sha256:f5aa040983c784611f8a486a0fcda3ec13005eff6f0515c4ab4aa323f6199cd8,8273
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

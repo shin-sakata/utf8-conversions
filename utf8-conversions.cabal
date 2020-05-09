@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 98a6115389c63035a6c2493041b6481c7a0bac55530c76f499d9344fb9e6dff8
+-- hash: 17be1c9dd266d0583157f173d496b2cc43c279f96842fbfaaab08cc1f4aabadb
 
 name:           utf8-conversions
-version:        0.1.0.1
+version:        0.1.0.2
 synopsis:       A string conversion library that assumes utf8
 description:    Please see the README on GitHub at <https://github.com/chemirea/utf8-conversions#readme>
 category:       Data, Codec

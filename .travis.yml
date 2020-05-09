@@ -43,10 +43,6 @@ jobs:
       compiler: ": #stack default"
       addons: {apt: {packages: [libgmp-dev]}}
 
-    - env: BUILD=stack ARGS="--resolver lts-9"
-      compiler: ": #stack 8.0.2"
-      addons: {apt: {packages: [libgmp-dev]}}
-
     - env: BUILD=stack ARGS="--resolver lts-11"
       compiler: ": #stack 8.2.2"
       addons: {apt: {packages: [libgmp-dev]}}
@@ -71,10 +67,6 @@ jobs:
     # Build on macOS in addition to Linux
     - env: BUILD=stack ARGS=""
       compiler: ": #stack default osx"
-      os: osx
-
-    - env: BUILD=stack ARGS="--resolver lts-9"
-      compiler: ": #stack 8.0.2 osx"
       os: osx
 
     - env: BUILD=stack ARGS="--resolver lts-11"

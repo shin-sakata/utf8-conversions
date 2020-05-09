@@ -5,6 +5,29 @@
 
 This package provides a　Data.Convertible.Utf8 library for easy conversion of many string types in Haskell
 
+## usage
+
+```haskell
+import Data.Convertible.Utf8 (convert)
+
+string :: String
+string = "Hello world"
+
+bytestring :: ByteString
+bytestring = convert string
+
+text :: Text
+text = convert bytestring
+```
+
+A typeclass that represents something that can be converted.
+A `Convertible a b` instance represents an `a` that can be converted to a `b`.
+
+```haskell
+class Convertible a b where
+  convert :: a -> b
+```
+
 ## Support
 
 - String

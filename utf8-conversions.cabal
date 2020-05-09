@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 20209884cc91e2f55dd943d96653bb5b2e58acef1a573c9f365558c049180cc1
+-- hash: 98a6115389c63035a6c2493041b6481c7a0bac55530c76f499d9344fb9e6dff8
 
 name:           utf8-conversions
 version:        0.1.0.1
@@ -14,7 +14,7 @@ category:       Data, Codec
 homepage:       https://github.com/chemirea/utf8-conversions#readme
 bug-reports:    https://github.com/chemirea/utf8-conversions/issues
 author:         Shintaro Sakata
-maintainer:     Shintaro Sakata
+maintainer:     shintaro.sakata.tokyo@gmail.com
 copyright:      2020 Shintaro Sakata
 license:        BSD3
 license-file:   LICENSE

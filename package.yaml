@@ -3,7 +3,7 @@ version:             0.1.0.1
 github:              chemirea/utf8-conversions
 license:             BSD3
 author:              Shintaro Sakata
-maintainer:          Shintaro Sakata
+maintainer:          shintaro.sakata.tokyo@gmail.com
 copyright:           2020 Shintaro Sakata
 category:            Data, Codec
 synopsis:            A string conversion library that assumes utf8

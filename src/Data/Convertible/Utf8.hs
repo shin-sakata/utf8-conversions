@@ -1,22 +1,30 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 
-module Data.Convertible.Utf8 where
+module Data.Convertible.Utf8
+  ( convert,
+    Convertible,
+  )
+where
 
-import qualified Codec.Binary.UTF8.String  as Codec.UTF8
-import qualified Data.ByteString           as BS
-import qualified Data.ByteString.Builder   as BSB
-import qualified Data.ByteString.Lazy      as BSL
-import qualified Data.ByteString.Lazy.UTF8 as BSL.UTF8
-import qualified Data.ByteString.Short     as BSS
-import qualified Data.ByteString.UTF8      as BS.UTF8
-import           Data.Maybe                (fromJust)
-import qualified Data.Text                 as T
-import qualified Data.Text.Encoding        as TE
-import qualified Data.Text.Lazy            as TL
-import qualified Data.Text.Lazy.Builder    as TB
-import qualified Data.Text.Lazy.Encoding   as TLE
-import qualified Data.Text.Short           as TS
+import qualified Codec.Binary.UTF8.String       as Codec.UTF8
+import qualified Data.ByteString                as BS
+import qualified Data.ByteString.Builder        as BSB
+import qualified Data.ByteString.Lazy           as BSL
+import qualified Data.ByteString.Lazy.UTF8      as BSL.UTF8
+import qualified Data.ByteString.Short          as BSS
+import qualified Data.ByteString.UTF8           as BS.UTF8
+import           Data.Convertible.Utf8.Internal (ByteString, ByteStringBuilder,
+                                                 LazyByteString, LazyText,
+                                                 ShortByteString, ShortText,
+                                                 Text, TextBuilder)
+import           Data.Maybe                     (fromJust)
+import qualified Data.Text                      as T
+import qualified Data.Text.Encoding             as TE
+import qualified Data.Text.Lazy                 as TL
+import qualified Data.Text.Lazy.Builder         as TB
+import qualified Data.Text.Lazy.Encoding        as TLE
+import qualified Data.Text.Short                as TS
 
 -- | A typeclass that represents something that can be converted.
 --  A @Convertible a b@ instance represents an @a@ that can be converted to a @b@.
@@ -24,15 +32,6 @@ class Convertible a b where
   -- | Convert from @a@ to @b@.
   --    Byte string is assumed to be in utf-8 encoding.
   convert :: a -> b
-
-type Text = T.Text
-type LazyText = TL.Text
-type TextBuilder = TB.Builder
-type ShortText = TS.ShortText
-type ByteString = BS.ByteString
-type LazyByteString = BSL.ByteString
-type ByteStringBuilder = BSB.Builder
-type ShortByteString = BSS.ShortByteString
 
 -- Convert from String
 

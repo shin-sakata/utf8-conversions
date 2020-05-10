@@ -2,6 +2,7 @@ module Data.Convertible.Utf8Spec where
 
 import           Codec.Text.Detect     (detectEncodingName)
 import           Data.Convertible.Utf8
+import           Data.Convertible.Utf8.Internal
 import           Test.Hspec
 
 spec :: Spec

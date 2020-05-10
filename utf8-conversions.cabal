@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 675427925a81242ebfb81917697f089a33fec8fc6ccfd83ddf2cd981f8bd4dfe
+-- hash: 3a40a05c28b9355693efd10432ac182a5141920f242b2e99942e7d8503662439
 
 name:           utf8-conversions
 version:        0.1.0.3
@@ -30,6 +30,7 @@ source-repository head
 library
   exposed-modules:
       Data.Convertible.Utf8
+      Data.Convertible.Utf8.Internal
   other-modules:
       Paths_utf8_conversions
   hs-source-dirs:

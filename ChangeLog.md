@@ -2,7 +2,7 @@
 
 #### 0.1.0.4
 
-Changed so that type synonyms around strings are not exported
+- Changed so that type synonyms around strings are not exported.
 
 #### 0.1.0.3
 

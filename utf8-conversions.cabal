@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 17be1c9dd266d0583157f173d496b2cc43c279f96842fbfaaab08cc1f4aabadb
+-- hash: 028403843194aec9e4b6036ee67755fa64ab93c1b59ee32fe9c3859b0f66d263
 
 name:           utf8-conversions
 version:        0.1.0.2
@@ -54,8 +54,8 @@ test-suite utf8-conversions-test
   build-depends:
       base >=4.7 && <5
     , bytestring >=0.10.4 && <0.11
-    , charsetdetect
-    , hspec
+    , charsetdetect-ae >=1.0 && <1.2
+    , hspec >=2.0 && <3.0
     , text >=1.0 && <1.3
     , text-short >=0.1.1 && <0.1.4
     , utf8-conversions

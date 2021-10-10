@@ -32,6 +32,8 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    build-tools:
+    - hspec-discover
     dependencies:
     - utf8-conversions
     - charsetdetect-ae >= 1.0 && < 1.2
